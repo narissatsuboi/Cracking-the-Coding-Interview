@@ -26,8 +26,8 @@ def reverse_list(head):
         next = head.next
         head.next = prev
         prev = head
-        head = head.next
-    return head
+        head = next
+    return prev
 
 
 def print_list(head):
