@@ -29,20 +29,27 @@ import unittest
 
 
 def is_unique_naive(s):
-    for i in range(len(s)):
-        for j in range(len(s)):
-            if i != j and s[i] == s[j]:
+    len_ = len(s)
+    # edge case: len less than 2
+    if len_ < 2: return True
+    # compare each char to the rest of string
+    for i in range(len_):
+        for j in range(len_):
+            # check for match where j is not i
+            if i!=j and s[i] == s[j]:
                 return False
-    return True
-
+    return False
 
 def is_unique(s):
-    seen = {}  # holds chars that have been encountered during iteration
+    # edge case : len is less than 2
+    if len(s) < 2: return True
 
-    for c in s:
-        if c in seen:
+    # check if the curr char has been encountered
+    have_seen = {}  # holds characters that have been seen during traversal
+    for ch in s:
+        if ch in have_seen:
             return False
-        seen[c] = True
+        have_seen[ch] = ch
     return True
 
 
