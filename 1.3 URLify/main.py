@@ -72,6 +72,40 @@ def URLify(s, i):
 
     return "".join(s_lst)
 
+# creates custom size list with buffer
+def urlify(s, URL):
+    # calculate size of new string container, for each space, size increases
+    # by 2. new size = len of string + (num spaces * 2)
+    num_spaces = s.count(' ') # get number of spaces in string
+    string = [' '] * (len(s) + (num_spaces * len(URL) - num_spaces))
+    # print("length of url: ", len(URL))
+    # print("num spaces: ", num_spaces)
+    # print("true length of string: ", len(s))
+    # print("length of new string = true length + num spaces*length of URL - "
+    #       "num spaces")
+    # print("length with buffer: ", len(string))
+    # populate new container
+    for i in range(len(s)):
+        string[i] = s[i]
+    # place pointers
+    fast = len(s) - 1
+    slow = len(string) - 1
+
+    # traverse the list backward, replacing with slow ptr
+    while fast >= 0:
+        if string[fast] == ' ':
+            for ch in reversed(URL):
+                string[slow] = ch
+                slow -= 1
+            fast -= 1
+        else:
+            string[slow] = string[fast]
+            fast -= 1
+            slow -= 1
+        print(string)
+
+    return ' '.join(str(c) for c in string)
+
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
